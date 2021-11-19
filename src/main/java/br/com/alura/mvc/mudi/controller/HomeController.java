@@ -26,7 +26,8 @@ public class HomeController {
 	@GetMapping("/home")
 	public String home(Model model , Principal principal) {
 		
-		List<Pedido> pedidos = pedidoRepository.findAllByUser(principal.getName());
+		Pageable pageable = PageRequest.of(0, 5);
+		List<Pedido> pedidos = pedidoRepository.findAllByUser(principal.getName(),pageable);
 		model.addAttribute("pedidos", pedidos);
 	
 		return "home"; 
