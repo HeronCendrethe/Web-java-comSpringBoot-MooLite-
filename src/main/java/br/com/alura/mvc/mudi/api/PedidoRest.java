@@ -1,15 +1,15 @@
-package br.com.alura.mvc.mudi.controller;
+package br.com.alura.mvc.mudi.api;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.mvc.mudi.dto.ReqNovoPedido;
 import br.com.alura.mvc.mudi.model.Pedido;
@@ -17,9 +17,9 @@ import br.com.alura.mvc.mudi.model.User;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
 import br.com.alura.mvc.mudi.repository.UserRepository;
 
-@Controller
-@RequestMapping("pedido")
-public class PedidoController {
+@RestController
+@RequestMapping ("/api/pedido")
+public class PedidoRest {
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
@@ -33,10 +33,10 @@ public class PedidoController {
 	}
 	
 	@PostMapping("novo")
-	public String novo(@Valid ReqNovoPedido requisicao, BindingResult result) {
+	public Boolean novo(@Valid ReqNovoPedido requisicao, BindingResult result,HttpStatus httpStatus) {
 		
 		if(result.hasErrors() == true) {
-			return "pedido/formulario";
+			return httpStatus.is3xxRedirection();
 		}
 		
 		String username  = SecurityContextHolder
@@ -49,8 +49,7 @@ public class PedidoController {
 		pedido.setUser(usuario);
 		pedidoRepository.save(pedido);
 		
-		
-		return "redirect:/home/lista";
+		return httpStatus.is2xxSuccessful();
 	}
 	
 	@PostMapping ("delete")
@@ -70,3 +69,5 @@ public class PedidoController {
 
 	
 }
+
+

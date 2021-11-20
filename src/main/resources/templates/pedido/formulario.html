@@ -6,39 +6,38 @@
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
 		crossorigin="anonymous">
-	</head>
+</head>
 <body>
 	<nav>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">MooLite!</a>
-    <button class="navbar-toggler" type="button"
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">MooLite!</a>
+				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/home">Voltar para a tela de inicio</a>
-        </li>
-           </li>
-        <li class="nav-item">
-          <a onclick="document.querySelector('#form-login').submit()"
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/home/lista">Voltar para a tela de
+								inicio</a></li>
+						</li>
+						<li class="nav-item"><a
+							onclick="document.querySelector('#form-login').submit()"
 							class="nav-link" sec:authorize="isAuthenticated()" href="#">logout</a>
-          <form id="form-login" th:action="@{/logout}" method="post"></form>
-        </li>
-      <form class="d-flex">
-        <a href="/pedido/formulario" button
+							<form id="form-login" th:action="@{/logout}" method="post"></form>
+						</li>
+						<form class="d-flex">
+							<a href="/pedido/formulario" button
 								class="btn btn-outline-success">Novo Pedido</a>
-      </form>
-    
+						</form>
 				</div>
-  </div>
-</nav>
-	</nav>	
-		<div class="container">
+			</div>
+		</nav>
+	</nav>
+	<div class="container">
 		<div class="card mt-3">
 			<form th:object="${reqNovoPedido}" class="card-body"
 				action="/pedido/novo" method="POST">
